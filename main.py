@@ -619,7 +619,9 @@ for b in a:
 #     def squareroot(self):
 #         print(f"The squareroot of {self.number} is {self.number **0.5}")
     
-#     def cube(self):
+#     def
+# 
+# cube = lambda x : x*x*x(self):
 #         print(f"The cube of {self.number} is {self.number **3}")
         
 # a = Calculator(4)
@@ -699,5 +701,48 @@ for b in a:
 # print(c1 + c2)
 # print(c1 * c2)
 
-#----------------------------------------------------------------------------------------------
+#-----------------------------------LAMBDA Function-----------------------------------------------------------
 
+# add = lambda x,y : x + y 
+# print(add(80, 20))
+
+# mul = lambda a,b : a* b
+# print(mul(80,20))
+
+
+#--------------------------------------MAP---------------------------------------------------
+
+# l = [2, 4, 6, 8, 10]
+
+# cube = lambda x : x*x*x
+
+# new_list = list(map(cube, l))
+# print(new_list)
+
+#------------------------------------------------------------------------------------------
+
+l1 = [10, 20, 30, 40, 50, 60, 70, 80, 90]
+
+dic_1=  {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+dic_2 = {}
+
+dic_2['data'] = l1
+stored_list = dic_2['data']
+#print(stored_list)
+
+combined_dict = {k: v for d in (dic_1, dic_2) for k, v in d.items()}
+
+combine_dict = {**dic_1, **dic_2}
+
+# for i in list :
+#     print(i)
+
+for key, values in combine_dict.items():
+    print(key, " : ", values)
+
+# print(combine_dict)

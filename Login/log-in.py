@@ -24,26 +24,33 @@ print(db)
 
 # take values from the user
 
-user = input("Enter Username:\n ")
+email = input("Enter email:\n ")
 password = input("Enter Your Password:\n ")
 
 # put query
 
-check_user = f"SELECT user_name FROM `register` WHERE user_name='{user}'"
+check_email = f"SELECT email FROM `register` WHERE email='{email}'"
 check_password = f"SELECT password FROM `register` WHERE password='{password}'"
 
 # execute queries
 
-cur.execute(check_user)
-username_result= cur.fetchall()
+cur.execute(check_email)
+email_result= cur.fetchall()
 
 cur.execute(check_password)
 password_result = cur.fetchall()
 
+
+key = Fernet.generate_key()
+fernet = Fernet(key)
+unhash_password = fernet.decrypt(password_result).decode()
+
+
+print(unhash_password)
 # store in a variable
 
-passwor = password_result
-usernam = username_result
+passwor = unhash_password
+usernam = email_result
 
 # print those variables
 
@@ -60,16 +67,30 @@ print(len(passwor))
 if(len(usernam) > 0 and len(passwor) > 0):
      print("log in successful")
      a = 'INSERT INTO login_status values(%s,%s,%s)'
-     b = (user,x,myip)
+     b = (email,x,myip)
      cur.execute(a,b)
      print("ip is:" + myip)
      
 else:
-     print("Login failed, wrong username or password")
+     print("Login failed, wrong email or password")
      
 
 
 db.commit()
+
+
+
+# key = Fernet.generate_key()
+# fernet = Fernet(key)
+# hash_password = fernet.decrypt(password).decode()
+
+
+
+# hash_password = fernet.crypt(password.encode())
+# decMessage = fernet.decrypt(encMessage).decode()
+ 
+# print("decrypted string: ", decMessage)
+
 
 # store = f"SELECT user_name,password FROM `register` WHERE user_name='{user}'"
 # cur.execute(store)
@@ -81,7 +102,7 @@ db.commit()
 #      print(type(pen))
 #      key = Fernet.generate_key()
 #      print(key)
-#      #ernet = Fernet(key)
+#      fernet = Fernet(key)
 
 #      #decMessage = fernet.decrypt(pen).decode()
 #      # print(decMessage)

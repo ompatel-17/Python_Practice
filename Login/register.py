@@ -14,24 +14,24 @@ print(db)
 
 # Take values from the user
 
-user = input("Enter Username:\n ")
+name = input("Enter name:\n ")
 email = input("Enter Your E-mail:\n ")
-first_name = input("Enter First Name:\n ")
-last_name = input("Enter Last Name:\n ")
+# first_name = input("Enter First Name:\n ")
+# last_name = input("Enter Last Name:\n ")
 password = input("Enter Your Password:\n ")
 
 #   password encrypt
 
 key = Fernet.generate_key()
 fernet = Fernet(key)
-passw = fernet.encrypt(password.encode())
+hash_password = fernet.encrypt(password.encode())
 
 
 
 
 try:
-    q = 'INSERT INTO register values(%s,%s,%s,%s,%s)'
-    t =(user,email,first_name,last_name,passw)
+    q = 'INSERT INTO register values(%s,%s,%s)' #,%s,%s
+    t =(name,email,hash_password) #first_name,last_name
     cur.execute(q,t)
     
     
